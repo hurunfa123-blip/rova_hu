@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rova_hu_notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Lora', 'Georgia', 'Times New Roman', serif; 
+            color: #333;
+            line-height: 1.8;
+            background-color: #fff;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 240px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #003472;
+            color: #ffffff;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-menu {
+            list-style: none;
+            flex-grow: 1;
+            margin-top: 20px;
+        }
+        .nav-menu li {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .nav-menu a {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.75);
+            transition: color 0.3s;
+        }
+        .nav-menu a:hover {
+            color: #ffffff;
+        }
+        .nav-menu li.active a {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .nav-menu li.active::before {
+            content: "•";
+            color: #ffffff;
+            position: absolute;
+            left: -18px;
+
+            top: 50%; 
+            transform: translateY(-50%); 
+            line-height: 1;
+
+            font-size: 18px;
+        }
+        .footer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+        .main-content {
+            margin-left: 260px; 
+            padding: 80px 10%;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .profile-img {
+            width: 240px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .profile-info h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 12px;
+        }
+        .profile-info .bio {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .profile-info .institution {
+            font-size: 16px;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .profile-info .email {
+            font-size: 16px;
+            color: #888;
+            margin-top: 5px;
+        }
+        .content-block p {
+            margin-bottom: 24px;
+            font-size: 20px;
+            text-align: justify;
+        }
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: 1px solid #003472;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #003472;
+            font-weight: 500;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            transition: all 0.3s;
+        }
+        .btn-cv:hover {
+            background-color: #003472;
+            color: #ffffff;
+        }
+        .btn-cv svg {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+        .quote-block {
+            background-color: #f4f7fa;
+            border-left: 4px solid #003472;
+            padding: 25px 30px;
+            font-style: italic;
+            color: #444;
+            font-size: 16px;
+            margin-top: 50px;
+        }
+        @media (max-width: 850px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                padding: 20px 30px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .nav-menu {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 0;
+                gap: 20px;
+            }
+            .nav-menu li {
+                margin-bottom: 0;
+            }
+            .nav-menu li.active::before {
+                display: none; 
+            }
+            .footer {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 40px 6%;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+        .my-link {
+            color: #2E4E7E;
+            text-decoration: underline;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .note-item {
+            padding: 30px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        /* 最后一个笔记底部不需要下划线 */
+        .note-item:last-child {
+            border-bottom: none; 
+        }
+        .note-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 8px;
+        }
+        .note-desc {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            font-size: 15px;
+            color: #003472;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        .btn-pdf:hover {
+            opacity: 0.7;
+        }
+        .btn-pdf svg {
+            margin-right: 6px;
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+    <aside class="sidebar">
+        <ul class="nav-menu">
+            <li><a href="./about.html">About</a></li>
+            <li class="active"><a href="./notes.html">Notes</a></li>
+        </ul>
+
+        <div class="footer">
+            <p>&copy; 2026 Runfa Hu.</p>
+            <p>All rights reserved.</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <section id="notes">
+            <h2 class="section-title">Notes</h2>
+            
+            <div class="notes-list">
+                <div class="note-item">
+                    <h3 class="note-title">Revealed Preference Theory</h3>
+                    <p class="note-desc">This note about Afriat's Theorem.</p>
+                </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>
